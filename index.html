@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sytlish Photo Gallery</title>
+    <link rel="stylesheet" src="g_style.css">
+<style>:root {
+    /* Set fade in duration */
+    --fade-time: 0.5s;
+}
+
+body {
+    margin: 20px;
+    padding: 0;
+    background: #bab56a;
+}
+
+.container {
+    max-width: 760px;
+    margin: auto;
+    border: #fff solid 3px;
+    background: #fff;
+}
+
+.main-img img,
+.imgs img {
+    width: 100%;
+}
+
+.imgs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 5px;
+}
+
+.imgs img {
+    cursor: pointer;
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-in {
+    opacity: 0;
+    animation: fadeIn var(--fade-time) ease-in 1 forwards;
+}
+
+/* Media Queries */
+@media(max-width: 600px) {
+    .imgs {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}</style>
+</head>
+
+<body>
+<div class="container">
+    <div class="main-img">
+        <img src="https://cdn.pixabay.com/photo/2017/03/24/11/17/bali-2170900_960_720.jpg" id="current" alt="image">
+    </div>
+
+    <div class="imgs">
+        <img src="https://cdn.pixabay.com/photo/2017/03/24/11/17/bali-2170900_960_720.jpg" alt="image">
+        <img src="https://cdn.pixabay.com/photo/2016/08/08/16/09/indonesia-1578647_960_720.jpg" alt="image">
+        <img src="https://cdn.pixabay.com/photo/2016/11/14/02/51/rice-plantation-1822444_960_720.jpg" alt="image">
+        <img src="https://cdn.pixabay.com/photo/2021/01/27/13/47/cliff-5954980_960_720.jpg" alt="image">
+        <img src="https://cdn.pixabay.com/photo/2017/07/24/22/01/water-lily-2536194_960_720.jpg" alt="image">
+        <img src="https://cdn.pixabay.com/photo/2019/12/11/21/51/bali-4689382_960_720.jpg" alt="image">
+        <img src="https://cdn.pixabay.com/photo/2017/08/30/18/19/bali-2698078_960_720.jpg" alt="image">
+        <img src="https://cdn.pixabay.com/photo/2017/03/24/11/17/bali-2170900_960_720.jpg" alt="image">
+    </div>
+</div>
+<script>
+    const current = document.querySelector('#current');
+    const imgs = document.querySelector('.imgs');
+    const img = document.querySelectorAll('.imgs img');
+    const opacity = 0.6;
+
+    // Set first img opacity
+    img[0].style.opacity = opacity;
+
+    imgs.addEventListener('click', imgClick);
+
+    function imgClick(e) {
+        // Reset the opacity
+        img.forEach(img => (img.style.opacity = 1));
+
+        // Change current image to src of clicked image
+        current.src = e.target.src;
+
+        // Add fade in class
+        current.classList.add('fade-in');
+
+        // Remove fade-in class after .5 seconds
+        setTimeout(() => current.classList.remove('fade-in'), 500);
+
+        // Change the opacity to opacity var
+        e.target.style.opacity = opacity;
+    }
+
+</script>
+</body>
+</html>
